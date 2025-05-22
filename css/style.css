@@ -247,3 +247,19 @@ nav#navMenu a:hover {
     padding: 1rem 0.5rem;
   }
 }
+/* Einheitliches Dropdown-Design */
+select {
+  background-color: #fffaf6;
+  color: #5b3e31;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%235b3e31' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  cursor: pointer;
+}
