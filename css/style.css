@@ -136,6 +136,7 @@ button:hover {
   background-color: var(--text);
   border-radius: 5px;
   transition: all 0.3s ease-in-out;
+  display: block;
 }
 
 /* Zustand „aktiv“: zu X verwandeln */
