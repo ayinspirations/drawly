@@ -44,6 +44,13 @@ function handlePostLink() {
   });
 }
 
+function prepareDraw() {
+  const winnerInput = document.getElementById('winnerCount');
+  const winnerCount = parseInt(winnerInput?.value) || 1;
+  localStorage.setItem('winnerCount', winnerCount);
+  startDraw();
+}
+
 function startDraw() {
   if (comments.length > 100) {
     alert('Für mehr als 100 Kommentare ist ein kostenpflichtiger Plan erforderlich.');
@@ -52,7 +59,7 @@ function startDraw() {
   }
 
   loadComponent('screenContainer', '/components/giveaway-draw.html').then(() => {
-    const winnerCount = parseInt(document.getElementById('winnerCount')?.value) || 1;
+    const winnerCount = parseInt(localStorage.getItem('winnerCount')) || 1;
     const countdownBox = document.getElementById('countdownBox');
     let count = 3;
     countdownBox.textContent = count;
