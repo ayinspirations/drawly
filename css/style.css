@@ -119,21 +119,64 @@ button:hover {
   100% { transform: translateY(100vh); opacity: 0; }
 }
 
-/* Burger Menü */
-#burger {
-  cursor: pointer;
+/* Burger Menü Animation */
+.burger {
+  width: 30px;
+  height: 22px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 999;
 }
 
-#burger .bar {
-  width: 25px;
+.burger .bar {
   height: 3px;
+  width: 100%;
   background-color: var(--text);
-  transition: 0.3s;
-  display: block;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
 }
+
+/* Zustand „aktiv“: zu X verwandeln */
+.burger.open .bar:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.burger.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.open .bar:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Menü Styling */
+#navMenu {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  background: rgba(232,220,209,0.98);
+  border-radius: 16px;
+  padding: 1rem;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  animation: fadeIn 0.3s ease;
+}
+
+#navMenu a {
+  color: var(--text);
+  text-decoration: none;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+#navMenu a:hover {
+  color: var(--button-hover);
+}
+
 
 /* Navigationsmenü */
 nav#navMenu {

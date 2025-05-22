@@ -43,12 +43,30 @@ function goToCriteria() {
 
 function toggleMenu() {
   const nav = document.getElementById('navMenu');
-  const isVisible = nav.style.display === 'flex';
-  nav.style.display = isVisible ? 'none' : 'flex';
+  const burger = document.getElementById('burger');
+  const isOpen = nav.style.display === 'flex';
+
+  if (isOpen) {
+    nav.style.display = 'none';
+    burger.classList.remove('open');
+  } else {
+    nav.style.display = 'flex';
+    burger.classList.add('open');
+  }
 }
 
-window.toggleMenu = toggleMenu; // ← wichtig: Funktion global machen
+// Menü automatisch schließen, wenn ein Link geklickt wird
+document.addEventListener('DOMContentLoaded', () => {
+  const nav = document.getElementById('navMenu');
+  nav.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A') {
+      nav.style.display = 'none';
+      document.getElementById('burger').classList.remove('open');
+    }
+  });
+});
 
+window.toggleMenu = toggleMenu;
 
 window.handlePostLink = () => {
   const minTagged = document.getElementById('minTaggedAccounts').value;
