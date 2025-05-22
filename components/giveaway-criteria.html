@@ -1,0 +1,39 @@
+<!-- giveaway-criteria.html -->
+<div class="screen">
+  <h2>Kriterien festlegen</h2>
+  <div style="display: flex; flex-direction: column; gap: 1.5rem; align-items: center;">
+
+    <div class="criteria-card">
+      <h3># Hashtag</h3>
+      <p>Teilnehmer:innen müssen diesen Hashtag verwenden:</p>
+      <input type="text" id="hashtagInput" placeholder="#drawly" />
+    </div>
+
+    <div class="criteria-card">
+      <h3>👥 Freunde markieren</h3>
+      <p>Wie viele Personen sollen mindestens markiert werden?</p>
+      <input type="number" id="mentionCount" min="1" max="10" value="1" />
+    </div>
+
+    <div class="criteria-card">
+      <h3>✅ Folgen</h3>
+      <p>Folgende Accounts müssen gefolgt werden:</p>
+      <input type="text" id="follow1" placeholder="@drawly" />
+      <input type="text" id="follow2" placeholder="@zweiterAccount (optional)" />
+      <input type="text" id="follow3" placeholder="@dritterAccount (optional)" />
+    </div>
+
+    <div class="criteria-card" style="flex-direction: row; align-items: center; justify-content: center;">
+      <input type="checkbox" id="requireLike" style="margin-right: 10px;" />
+      <label for="requireLike">Beitrag muss geliked sein</label>
+    </div>
+
+    <div class="criteria-card">
+      <h3>🎁 Gewinner:innen</h3>
+      <p>Wie viele Personen sollen ausgelost werden?</p>
+      <input type="number" id="winnerCount" min="1" max="10" value="1" />
+    </div>
+
+    <button onclick="startDraw()">Auslosung starten</button>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drawly – Social Giveaway Tool</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="/js/main.js" defer></script>
+</head>
+<body>
+  <header style="display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem;">
+    <div onclick="showScreen('start')" style="cursor:pointer; font-family:'Playfair Display'; font-size:1.8rem; color:var(--text);">
+      Drawly
+    </div>
+    <div id="burger" onclick="toggleMenu()">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+  </header>
+
+  <nav id="navMenu">
+    <a href="#" onclick="showScreen('start')">Start</a>
+    <a href="#" onclick="showScreen('dashboard')">Dashboard</a>
+    <a href="#" onclick="showScreen('pricing')">Preise</a>
+    <a href="#" onclick="showScreen('impressum')">Impressum</a>
+    <a href="#" onclick="openLoginModal()">Login</a>
+  </nav>
+
+  <div id="app">
+    <div id="screenContainer"></div>
+  </div>
+
+  <div id="loginModal"></div>
+  <div id="premiumModal"></div>
+</body>
+</html>

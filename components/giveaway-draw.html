@@ -1,0 +1,18 @@
+<!-- giveaway-draw.html -->
+<div class="screen">
+  <h2>Gewinner</h2>
+  <div id="countdownBox" style="font-size:3rem; margin:1rem 0;"></div>
+  <div id="winnersList" style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;"></div>
+
+  <div style="display:flex; flex-direction:column; align-items:center; gap:1rem; margin-top:1rem; padding:1rem;">
+    <div id="screenshotBox" style="display:none;">
+      <button onclick="takeScreenshot()">Screenshot speichern</button>
+    </div>
+    <div id="protocolArea" style="display:none;">
+      <button onclick="downloadDrawProtocol()">Ziehungsprotokoll herunterladen</button>
+    </div>
+    <div id="exportArea" style="display:none;">
+      <button onclick="exportCommentsToCSV()">Teilnehmerliste als CSV exportieren</button>
+    </div>
+  </div>
+</div>
