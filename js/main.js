@@ -2,10 +2,14 @@
 
 const screens = {
   start: '/components/giveaway-start.html',
+  preview: '/components/giveaway-preview.html',
+  criteria: '/components/giveaway-criteria.html',
+  draw: '/components/giveaway-draw.html',
   dashboard: '/components/dashboard.html',
   pricing: '/components/pricing.html',
   impressum: '/components/impressum.html'
 };
+
 
 const modals = {
   loginModal: '/components/login-modal.html',
