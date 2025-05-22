@@ -52,4 +52,6 @@ function toggleMenu() {
 // Initialer Ladevorgang
 window.addEventListener('DOMContentLoaded', () => {
   showScreen('start');
+window.loadComponent = loadComponent;
+
 });
