@@ -29,10 +29,12 @@ function showScreen(name) {
 
 function openLoginModal() {
   loadComponent('loginModal', modals.loginModal);
+  closeMenu();
 }
 
 function openPremiumModal() {
   loadComponent('premiumModal', modals.premiumModal);
+  closeMenu();
 }
 
 async function loadComponent(id, url) {
@@ -64,6 +66,12 @@ function closeMenu() {
 }
 
 window.toggleMenu = toggleMenu;
+
+document.addEventListener('click', (e) => {
+  if (e.target.closest('#navMenu a') || e.target.closest('#burger') === null) {
+    closeMenu();
+  }
+});
 
 function goToPreview() {
   const postLinkInput = document.getElementById('postLink');
