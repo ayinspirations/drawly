@@ -1,7 +1,7 @@
 // main.js – Steuert Screens & Fehlerbehandlung
 
 const screens = {
-  start: '/components/giveaway.html',
+  start: '/components/giveaway-start.html',
   dashboard: '/components/dashboard.html',
   pricing: '/components/pricing.html',
   impressum: '/components/impressum.html'
