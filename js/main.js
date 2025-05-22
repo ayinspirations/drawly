@@ -41,6 +41,15 @@ function goToCriteria() {
   showScreen('criteria');
 }
 
+function toggleMenu() {
+  const nav = document.getElementById('navMenu');
+  const isVisible = nav.style.display === 'flex';
+  nav.style.display = isVisible ? 'none' : 'flex';
+}
+
+window.toggleMenu = toggleMenu; // ← wichtig: Funktion global machen
+
+
 window.handlePostLink = () => {
   const minTagged = document.getElementById('minTaggedAccounts').value;
   const hashtags = document.getElementById('requiredHashtags').value.split(',').map(h => h.trim()).filter(h => h);
