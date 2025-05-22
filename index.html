@@ -11,7 +11,7 @@
   <script src="/js/giveaway.js" defer></script>
   <script src="/js/main.js" defer></script>
 </head>
-<body>
+<body style="background:#f5f0e6; font-family:'Poppins', sans-serif; color:#5b3e31;">
   <header style="display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem;">
     <div onclick="showScreen('start')" style="cursor:pointer; font-family:'Playfair Display'; font-size:1.8rem; color:#5b3e31;">
       Drawly
@@ -23,7 +23,7 @@
     </div>
   </header>
 
-  <nav id="navMenu">
+  <nav id="navMenu" style="display:none; flex-direction: column; align-items:center; background:rgba(232,220,209,0.95); padding:1rem; border-radius:16px;">
     <a href="#" onclick="showScreen('start')">Start</a>
     <a href="#" onclick="showScreen('dashboard')">Dashboard</a>
     <a href="#" onclick="showScreen('pricing')">Preise</a>
@@ -31,7 +31,9 @@
     <a href="#" onclick="openLoginModal()">Login</a>
   </nav>
 
-  <div id="screenContainer"></div>
+  <main style="display:flex; justify-content:center; padding:2rem;">
+    <div id="screenContainer" style="width:100%; max-width:500px;"></div>
+  </main>
 
   <div id="loginModal"></div>
   <div id="premiumModal"></div>
