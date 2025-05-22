@@ -24,6 +24,7 @@ function showScreen(name) {
   const url = screens[name];
   if (!url) return;
   loadComponent('screenContainer', url);
+  closeMenu();
 }
 
 function openLoginModal() {
@@ -51,6 +52,15 @@ function toggleMenu() {
   const isOpen = nav.style.display === 'flex';
   nav.style.display = isOpen ? 'none' : 'flex';
   burger.classList.toggle('open', !isOpen);
+}
+
+function closeMenu() {
+  const nav = document.getElementById('navMenu');
+  const burger = document.getElementById('burger');
+  if (nav && burger) {
+    nav.style.display = 'none';
+    burger.classList.remove('open');
+  }
 }
 
 window.toggleMenu = toggleMenu;
@@ -87,7 +97,11 @@ async function setLanguage(langCode) {
   try {
     currentLang = langCode;
     localStorage.setItem('drawly-lang', langCode);
-    const res = await fetch(`/lang/${langCode}.json`);
+
+    const pathPrefix = window.location.pathname.includes('/drawly') ? '/drawly' : '';
+    const res = await fetch(`${pathPrefix}/lang/${langCode}.json`);
+    if (!res.ok) throw new Error('Language file not found');
+
     translations = await res.json();
     updateTexts();
   } catch (err) {
