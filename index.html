@@ -8,6 +8,13 @@
   <link rel="stylesheet" href="/css/style.css" />
   <script src="https://js.stripe.com/v3/"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    // Fallback falls main.js noch nicht geladen wurde
+    function setLanguage(lang) {
+      localStorage.setItem('drawly-lang', lang);
+      location.reload();
+    }
+  </script>
   <script src="/js/giveaway.js" defer></script>
   <script src="/js/main.js" defer></script>
 </head>
@@ -16,19 +23,29 @@
     <div onclick="showScreen('start')" style="cursor:pointer; font-family:'Playfair Display'; font-size:1.8rem; color:#5b3e31;">
       Drawly
     </div>
-    <div id="burger" onclick="toggleMenu()" class="burger">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
+    <div style="display:flex; align-items:center; gap:1rem;">
+      <select onchange="setLanguage(this.value)" style="padding: 0.4rem; border-radius: 8px;">
+        <option value="de">🇩🇪</option>
+        <option value="en">🇬🇧</option>
+        <option value="es">🇪🇸</option>
+        <option value="zh">🇨🇳</option>
+        <option value="ru">🇷🇺</option>
+        <option value="tr">🇹🇷</option>
+      </select>
+      <div id="burger" onclick="toggleMenu()" class="burger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
     </div>
   </header>
 
   <nav id="navMenu" style="display:none; flex-direction: column; align-items:center; background:rgba(232,220,209,0.95); padding:1rem; border-radius:16px;">
-    <a href="#" onclick="showScreen('start')">Start</a>
-    <a href="#" onclick="showScreen('dashboard')">Dashboard</a>
-    <a href="#" onclick="showScreen('pricing')">Preise</a>
-    <a href="#" onclick="showScreen('impressum')">Impressum</a>
-    <a href="#" onclick="openLoginModal()">Login</a>
+    <a href="#" onclick="showScreen('start')" id="menuStart">Start</a>
+    <a href="#" onclick="showScreen('dashboard')" id="menuDashboard">Dashboard</a>
+    <a href="#" onclick="showScreen('pricing')" id="menuPricing">Preise</a>
+    <a href="#" onclick="showScreen('impressum')" id="menuImpressum">Impressum</a>
+    <a href="#" onclick="openLoginModal()" id="menuLogin">Login</a>
   </nav>
 
   <main style="display:flex; justify-content:center; padding:2rem;">
@@ -39,3 +56,4 @@
   <div id="premiumModal"></div>
 </body>
 </html>
+
