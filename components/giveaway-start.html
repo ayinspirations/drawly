@@ -12,9 +12,8 @@
   <script src="/js/main.js" defer></script>
 </head>
 <body style="background:#f5f0e6; font-family:'Poppins', sans-serif; color:#5b3e31;">
-  <header style="display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; position:relative;">
-
-    <div style="position:absolute; left:0.5rem;">
+  <header style="display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem;">
+    <div style="display:flex; align-items:center; gap:1rem;">
       <select onchange="setLanguage(this.value)" style="padding: 0.4rem; border-radius: 8px;">
         <option value="de">🇩🇪</option>
         <option value="en">🇬🇧</option>
@@ -23,12 +22,10 @@
         <option value="ru">🇷🇺</option>
         <option value="tr">🇹🇷</option>
       </select>
+      <div onclick="showScreen('start')" style="cursor:pointer; font-family:'Playfair Display'; font-size:1.8rem; color:#5b3e31;">
+        Drawly
+      </div>
     </div>
-
-    <div onclick="showScreen('start')" style="cursor:pointer; font-family:'Playfair Display'; font-size:1.8rem; color:#5b3e31;">
-      Drawly
-    </div>
-
     <div id="burger" onclick="toggleMenu()" class="burger">
       <span class="bar"></span>
       <span class="bar"></span>
