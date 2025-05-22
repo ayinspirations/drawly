@@ -1,4 +1,4 @@
-// giveaway.js – Neustrukturierung basierend auf klaren MVP-Anforderungen
+// giveaway.js – Mehrsprachige Version basierend auf MVP-Struktur
 
 const comments = Array.from({ length: 150 }, (_, i) => ({
   user: `user${i + 1}`,
@@ -9,7 +9,7 @@ const comments = Array.from({ length: 150 }, (_, i) => ({
 window.handlePostLink = function () {
   const link = document.getElementById('postLink')?.value || '';
   if (!link || !link.includes('http')) {
-    alert('Bitte gib einen gültigen Link ein.');
+    alert(translations.invalidLink || 'Bitte gib einen gültigen Link ein.');
     return;
   }
 
@@ -41,7 +41,7 @@ window.prepareDraw = function () {
   };
 
   if (comments.length > 100) {
-    alert('Für mehr als 100 Kommentare ist ein Abo erforderlich.');
+    alert(translations.subscriptionRequired || 'Für mehr als 100 Kommentare ist ein Abo erforderlich.');
     showScreen('pricing');
     return;
   }
@@ -69,7 +69,7 @@ function showWinners(winners) {
     div.innerHTML = `
       <div style="display:flex; flex-direction:column; align-items:center;">
         <img src="${winner.profilePic}" alt="${winner.user}" style="width:100px; height:100px; border-radius:50%; border:4px solid white; margin-bottom:10px;" />
-        <h3>Herzlichen Glückwunsch, ${winner.user}!</h3>
+        <h3>${(translations.congratsUser || 'Herzlichen Glückwunsch')}, ${winner.user}!</h3>
       </div>
     `;
     container.appendChild(div);
@@ -102,7 +102,7 @@ function takeScreenshot() {
 }
 
 function exportCommentsToCSV() {
-  const rows = [['Benutzer', 'Kommentar']];
+  const rows = [[translations.user || 'Benutzer', translations.comment || 'Kommentar']];
   comments.forEach(c => rows.push([c.user, c.text]));
   let csvContent = 'data:text/csv;charset=utf-8,' + rows.map(e => e.join(',')).join('\n');
   const encodedUri = encodeURI(csvContent);
@@ -119,7 +119,15 @@ function downloadDrawProtocol() {
   const timestamp = new Date().toLocaleString();
   const criteria = window.drawCriteria || {};
 
-  const protocol = `Drawly Ziehungsprotokoll\nDatum: ${timestamp}\nKriterien:\n- Like erforderlich: ${criteria.likeRequired ? 'Ja' : 'Nein'}\n- Hashtags: ${criteria.hashtags?.join(', ') || 'Keine'}\nTeilnehmer: ${comments.length}\nGewinner:\n${winners.map((w, i) => `${i + 1}. ${w.user}`).join('\n')}\nZufalls-ID: DRAWLY-${Date.now()}`;
+  const protocol = `${translations.protocolHeader || 'Drawly Ziehungsprotokoll'}\n` +
+    `${translations.date || 'Datum'}: ${timestamp}\n` +
+    `${translations.criteria || 'Kriterien'}:\n` +
+    `- ${translations.likeRequired || 'Like erforderlich'}: ${criteria.likeRequired ? (translations.yes || 'Ja') : (translations.no || 'Nein')}\n` +
+    `- Hashtags: ${criteria.hashtags?.join(', ') || (translations.none || 'Keine')}\n` +
+    `${translations.participants || 'Teilnehmer'}: ${comments.length}\n` +
+    `${translations.winners || 'Gewinner'}:\n` +
+    `${winners.map((w, i) => `${i + 1}. ${w.user}`).join('\n')}\n` +
+    `Zufalls-ID: DRAWLY-${Date.now()}`;
 
   const blob = new Blob([protocol], { type: 'text/plain' });
   const link = document.createElement('a');

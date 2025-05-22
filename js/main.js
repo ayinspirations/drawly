@@ -1,14 +1,37 @@
+// main.js – final mit Sprachumschaltung, Navigation und Logik
+
 const screens = {
   start: '/components/giveaway-start.html',
   preview: '/components/giveaway-preview.html',
   criteria: '/components/giveaway-criteria.html',
-  draw: '/components/giveaway-draw.html' // Hier angepasst oder hinzugefügt
+  draw: '/components/giveaway-draw.html'
 };
 
+const modals = {
+  loginModal: '/components/login-modal.html',
+  premiumModal: '/components/premium-modal.html'
+};
+
+let currentLang = 'en';
+let translations = {};
 let currentPostLink = '';
+let winnerCount = 1;
+let minTaggedAccounts = 0;
+let requiredHashtags = [];
+let postLiked = false;
 
 function showScreen(name) {
-  loadComponent('screenContainer', screens[name]);
+  const url = screens[name];
+  if (!url) return;
+  loadComponent('screenContainer', url);
+}
+
+function openLoginModal() {
+  loadComponent('loginModal', modals.loginModal);
+}
+
+function openPremiumModal() {
+  loadComponent('premiumModal', modals.premiumModal);
 }
 
 async function loadComponent(id, url) {
@@ -16,24 +39,26 @@ async function loadComponent(id, url) {
     const res = await fetch(url);
     if (!res.ok) throw new Error('Fehler beim Laden');
     document.getElementById(id).innerHTML = await res.text();
-
-    if(url.includes('giveaway-preview.html')){
-      document.getElementById('previewLink').textContent = currentPostLink;
-    }
-    
-    document.querySelectorAll('.screen').forEach(s => s.classList.add('active'));
+    updateTexts();
   } catch (err) {
     console.error(`[Drawly Fehler] Komponente '${url}' konnte nicht geladen werden.`, err);
   }
 }
 
+function toggleMenu() {
+  const nav = document.getElementById('navMenu');
+  const burger = document.getElementById('burger');
+  const isOpen = nav.style.display === 'flex';
+  nav.style.display = isOpen ? 'none' : 'flex';
+  burger.classList.toggle('open', !isOpen);
+}
+
+window.toggleMenu = toggleMenu;
+
 function goToPreview() {
-  const postLink = document.getElementById('postLink').value;
-  if (!postLink) {
-    alert('Bitte gib einen gültigen Link ein!');
-    return;
-  }
-  currentPostLink = postLink;
+  const postLinkInput = document.getElementById('postLink');
+  if (!postLinkInput || !postLinkInput.value) return alert("Bitte Link eingeben");
+  currentPostLink = postLinkInput.value;
   showScreen('preview');
 }
 
@@ -41,50 +66,61 @@ function goToCriteria() {
   showScreen('criteria');
 }
 
-function toggleMenu() {
-  const nav = document.getElementById('navMenu');
-  const burger = document.getElementById('burger');
-  const isOpen = nav.style.display === 'flex';
-
-  if (isOpen) {
-    nav.style.display = 'none';
-    burger.classList.remove('open');
-  } else {
-    nav.style.display = 'flex';
-    burger.classList.add('open');
-  }
-}
-
-// Menü automatisch schließen, wenn ein Link geklickt wird
-document.addEventListener('DOMContentLoaded', () => {
-  const nav = document.getElementById('navMenu');
-  nav.addEventListener('click', (e) => {
-    if (e.target.tagName === 'A') {
-      nav.style.display = 'none';
-      document.getElementById('burger').classList.remove('open');
-    }
-  });
-});
-
-window.toggleMenu = toggleMenu;
-
 window.handlePostLink = () => {
-  const minTagged = document.getElementById('minTaggedAccounts').value;
-  const hashtags = document.getElementById('requiredHashtags').value.split(',').map(h => h.trim()).filter(h => h);
-  const postLiked = document.getElementById('postLiked').value === 'true';
-  const winnerCount = document.getElementById('winnerCount').value;
+  minTaggedAccounts = parseInt(document.getElementById('minTaggedAccounts').value);
+  requiredHashtags = document.getElementById('requiredHashtags').value.split(',').map(h => h.trim()).filter(Boolean);
+  postLiked = document.getElementById('postLiked').value === 'true';
+  winnerCount = parseInt(document.getElementById('winnerCount').value);
 
   console.log({
     currentPostLink,
-    minTagged,
-    hashtags,
+    minTaggedAccounts,
+    requiredHashtags,
     postLiked,
     winnerCount
   });
 
-  alert('Kommentare werden geladen und ausgewertet.');
+  showScreen('draw');
 };
 
+async function setLanguage(langCode) {
+  try {
+    currentLang = langCode;
+    localStorage.setItem('drawly-lang', langCode);
+    const res = await fetch(`/lang/${langCode}.json`);
+    translations = await res.json();
+    updateTexts();
+  } catch (err) {
+    console.error("Sprache konnte nicht geladen werden:", err);
+  }
+}
+
+function updateTexts() {
+  for (const key in translations) {
+    const el = document.getElementById(key);
+    if (el) el.textContent = translations[key];
+  }
+}
+
+async function detectUserLanguage() {
+  try {
+    const res = await fetch('https://ipapi.co/json/');
+    const data = await res.json();
+    const countryCode = data.country;
+    const map = { DE: 'de', US: 'en', GB: 'en', ES: 'es', CN: 'zh', RU: 'ru', TR: 'tr' };
+    const lang = map[countryCode] || 'en';
+    setLanguage(lang);
+  } catch {
+    setLanguage('en');
+  }
+}
+
 window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('drawly-lang');
+  if (saved) {
+    setLanguage(saved);
+  } else {
+    detectUserLanguage();
+  }
   showScreen('start');
 });
