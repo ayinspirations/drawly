@@ -158,4 +158,8 @@ function downloadDrawProtocol() {
   link.href = URL.createObjectURL(blob);
   link.download = 'ziehungsprotokoll.txt';
   link.click();
+  window.handlePostLink = handlePostLink;
+  window.prepareDraw = prepareDraw;
+  window.startDraw = startDraw;
+
 }
