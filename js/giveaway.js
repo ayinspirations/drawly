@@ -6,7 +6,7 @@ const comments = Array.from({ length: 150 }, (_, i) => ({
   profilePic: `https://i.pravatar.cc/100?img=${(i % 70) + 1}`
 }));
 
-function handlePostLink() {
+window.handlePostLink = function () {
   const link = document.getElementById('postLink')?.value || '';
   let platform = '';
   if (link.includes('instagram.com')) platform = 'Instagram';
@@ -44,14 +44,14 @@ function handlePostLink() {
   });
 }
 
-function prepareDraw() {
+window.prepareDraw = function () {
   const winnerInput = document.getElementById('winnerCount');
   const winnerCount = parseInt(winnerInput?.value) || 1;
   localStorage.setItem('winnerCount', winnerCount);
   startDraw();
 }
 
-function startDraw() {
+window.startDraw = function () {
   if (comments.length > 100) {
     alert('Für mehr als 100 Kommentare ist ein kostenpflichtiger Plan erforderlich.');
     showScreen('pricing');
@@ -158,8 +158,4 @@ function downloadDrawProtocol() {
   link.href = URL.createObjectURL(blob);
   link.download = 'ziehungsprotokoll.txt';
   link.click();
-  window.handlePostLink = handlePostLink;
-  window.prepareDraw = prepareDraw;
-  window.startDraw = startDraw;
-
 }
