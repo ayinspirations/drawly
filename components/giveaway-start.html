@@ -8,11 +8,21 @@
   <link rel="stylesheet" href="/css/style.css" />
   <script src="https://js.stripe.com/v3/"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    // Fallback falls main.js noch nicht geladen wurde
+    function setLanguage(lang) {
+      localStorage.setItem('drawly-lang', lang);
+      location.reload();
+    }
+  </script>
   <script src="/js/giveaway.js" defer></script>
   <script src="/js/main.js" defer></script>
 </head>
 <body style="background:#f5f0e6; font-family:'Poppins', sans-serif; color:#5b3e31;">
   <header style="display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem;">
+    <div onclick="showScreen('start')" style="cursor:pointer; font-family:'Playfair Display'; font-size:1.8rem; color:#5b3e31;">
+      Drawly
+    </div>
     <div style="display:flex; align-items:center; gap:1rem;">
       <select onchange="setLanguage(this.value)" style="padding: 0.4rem; border-radius: 8px;">
         <option value="de">🇩🇪</option>
@@ -22,14 +32,11 @@
         <option value="ru">🇷🇺</option>
         <option value="tr">🇹🇷</option>
       </select>
-      <div onclick="showScreen('start')" style="cursor:pointer; font-family:'Playfair Display'; font-size:1.8rem; color:#5b3e31;">
-        Drawly
+      <div id="burger" onclick="toggleMenu()" class="burger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
       </div>
-    </div>
-    <div id="burger" onclick="toggleMenu()" class="burger">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
     </div>
   </header>
 
