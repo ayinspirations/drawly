@@ -1,11 +1,7 @@
 <!-- giveaway-preview.html -->
-<div class="screen">
-  <h2>Vorschau</h2>
-  <div id="platformInfo" style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:1rem;">
-    <img id="platformIcon" src="" alt="Plattform" style="width:24px; height:24px;" />
-    <span id="platformText" style="font-style:italic; color:var(--text);"></span>
-  </div>
-  <p>Likes: 132 • Kommentare: 240</p>
-  <img src="https://placehold.co/500x300?text=Vorschau" style="width:100%; border-radius:10px;" />
-  <button onclick="loadComponent('screenContainer', '/components/giveaway-criteria.html')">Kriterien festlegen</button>
+<div class="screen" style="max-width: 400px; margin: auto; text-align:center; background:#fffaf6; border-radius:24px; padding:2rem; box-shadow:0 6px 20px rgba(0,0,0,0.1);">
+  <h2 style="font-family: 'Playfair Display', serif; color:#5b3e31;">Vorschau</h2>
+  <img id="previewImage" src="" alt="Vorschau" style="width:300px; border-radius:30px; box-shadow:0 4px 12px rgba(0,0,0,0.1);" />
+  <p style="margin:1rem 0; color:#5b3e31;">Likes: <span id="likeCount"></span> • Kommentare: <span id="commentCount"></span></p>
+  <button onclick="gotoCriteria()" style="background:#c8a989; color:white; padding:0.75rem 1.2rem; border:none; border-radius:30px; font-weight:bold; cursor:pointer;">Kriterien auswählen</button>
 </div>

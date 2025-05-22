@@ -1,4 +1,4 @@
-// main.js – Steuert Screens & Fehlerbehandlung
+// main.js – erweitert für neuen MVP-Ablauf
 
 const screens = {
   start: '/components/giveaway-start.html',
@@ -9,7 +9,6 @@ const screens = {
   pricing: '/components/pricing.html',
   impressum: '/components/impressum.html'
 };
-
 
 const modals = {
   loginModal: '/components/login-modal.html',
@@ -53,9 +52,12 @@ function toggleMenu() {
   nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
 }
 
-// Initialer Ladevorgang
 window.addEventListener('DOMContentLoaded', () => {
   showScreen('start');
-window.loadComponent = loadComponent;
-
 });
+
+// global verfügbar machen
+window.loadComponent = loadComponent;
+window.showScreen = showScreen;
+window.openLoginModal = openLoginModal;
+window.openPremiumModal = openPremiumModal;

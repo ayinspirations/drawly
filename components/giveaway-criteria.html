@@ -1,39 +1,12 @@
 <!-- giveaway-criteria.html -->
-<div class="screen">
-  <h2>Kriterien festlegen</h2>
-  <div style="display: flex; flex-direction: column; gap: 1.5rem; align-items: center;">
-
-    <div class="criteria-card">
-      <h3># Hashtag</h3>
-      <p>Teilnehmer:innen müssen diesen Hashtag verwenden:</p>
-      <input type="text" id="hashtagInput" placeholder="#drawly" />
-    </div>
-
-    <div class="criteria-card">
-      <h3>👥 Freunde markieren</h3>
-      <p>Wie viele Personen sollen mindestens markiert werden?</p>
-      <input type="number" id="mentionCount" min="1" max="10" value="1" />
-    </div>
-
-    <div class="criteria-card">
-      <h3>✅ Folgen</h3>
-      <p>Folgende Accounts müssen gefolgt werden:</p>
-      <input type="text" id="follow1" placeholder="@drawly" />
-      <input type="text" id="follow2" placeholder="@zweiterAccount (optional)" />
-      <input type="text" id="follow3" placeholder="@dritterAccount (optional)" />
-    </div>
-
-    <div class="criteria-card" style="flex-direction: row; align-items: center; justify-content: center;">
-      <input type="checkbox" id="requireLike" style="margin-right: 10px;" />
-      <label for="requireLike">Beitrag muss geliked sein</label>
-    </div>
-
-    <div class="criteria-card">
-      <h3>🎁 Gewinner:innen</h3>
-      <p>Wie viele Personen sollen ausgelost werden?</p>
-      <input type="number" id="winnerCount" min="1" max="10" value="1" />
-    </div>
-
-   <button onclick="prepareDraw()">Auslosung starten</button>
+<div class="screen" style="max-width: 400px; margin: auto; text-align:center; background:#fffaf6; border-radius:24px; padding:2rem; box-shadow:0 6px 20px rgba(0,0,0,0.1);">
+  <h2 style="font-family: 'Playfair Display', serif; color:#5b3e31;">Kriterien auswählen</h2>
+  <div class="criteria-card" style="background:#fef9f3; border:1px solid #e8dcd1; padding:1rem; border-radius:16px; margin-bottom:1rem;">
+    <label style="color:#5b3e31;"><input type="checkbox" id="requireLike" /> Beitrag muss geliked sein</label>
   </div>
+  <div class="criteria-card" style="background:#fef9f3; border:1px solid #e8dcd1; padding:1rem; border-radius:16px; margin-bottom:1rem;">
+    <label style="color:#5b3e31;">Hashtags (durch Komma trennen)</label>
+    <input type="text" id="hashtagInput" placeholder="#gewinn, #drawly" style="margin-top:0.5rem; padding:0.5rem; width:100%; border-radius:16px; border:1px solid #ccc;" />
+  </div>
+  <button onclick="prepareDraw()" style="background:#c8a989; color:white; padding:0.75rem 1.2rem; border:none; border-radius:30px; font-weight:bold; cursor:pointer;">Gewinner auslosen</button>
 </div>
