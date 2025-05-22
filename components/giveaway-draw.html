@@ -1,10 +1,20 @@
 <!-- giveaway-draw.html -->
-<div class="screen" style="max-width: 400px; margin: auto; text-align:center; background:#fffaf6; border-radius:24px; padding:2rem; box-shadow:0 6px 20px rgba(0,0,0,0.1);">
-  <h2 style="font-family: 'Playfair Display', serif; color:#5b3e31;">🎉 Gewinner:in 🎉</h2>
-  <div id="winnersList" style="margin:2rem 0;"></div>
+<div class="screen active" style="max-width:500px;margin:auto;text-align:center;background:#fffaf6;border-radius:24px;padding:2rem;box-shadow:0 6px 20px rgba(0,0,0,0.1);">
+  <h2 style="font-family:'Playfair Display',serif;color:#5b3e31;">🎉 Gewinner 🎉</h2>
+
+  <div id="winnersList" style="margin:1.5rem 0;font-size:1rem;color:#5b3e31;">
+    <!-- Gewinner werden hier dynamisch geladen -->
+  </div>
+
   <div style="display:flex; flex-direction:column; gap:1rem;">
-    <button onclick="downloadDrawProtocol()" style="background:#c8a989; color:white; padding:0.6rem 1rem; border:none; border-radius:24px; font-weight:bold; cursor:pointer;">Zertifikat herunterladen</button>
-    <button onclick="takeScreenshot()" style="background:#c8a989; color:white; padding:0.6rem 1rem; border:none; border-radius:24px; font-weight:bold; cursor:pointer;">Screenshot speichern</button>
-    <button onclick="exportCommentsToCSV()" style="background:#c8a989; color:white; padding:0.6rem 1rem; border:none; border-radius:24px; font-weight:bold; cursor:pointer;">Teilnehmer als CSV</button>
+    <button onclick="downloadDrawProtocol()" style="background:#c8a989;color:white;padding:0.75rem 1.2rem;border:none;border-radius:24px;font-weight:bold;cursor:pointer;">
+      📜 Zertifikat herunterladen
+    </button>
+    <button onclick="takeScreenshot()" style="background:#c8a989;color:white;padding:0.75rem 1.2rem;border:none;border-radius:24px;font-weight:bold;cursor:pointer;">
+      📸 Screenshot speichern
+    </button>
+    <button onclick="exportCommentsToCSV()" style="background:#c8a989;color:white;padding:0.75rem 1.2rem;border:none;border-radius:24px;font-weight:bold;cursor:pointer;">
+      📥 Teilnehmer als CSV
+    </button>
   </div>
 </div>

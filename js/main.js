@@ -1,70 +1,63 @@
-// main.js – erweitert für neuen MVP-Ablauf
-
 const screens = {
   start: '/components/giveaway-start.html',
   preview: '/components/giveaway-preview.html',
   criteria: '/components/giveaway-criteria.html',
-  draw: '/components/giveaway-draw.html',
-  dashboard: '/components/dashboard.html',
-  pricing: '/components/pricing.html',
-  impressum: '/components/impressum.html'
+  draw: '/components/giveaway-draw.html' // Hier angepasst oder hinzugefügt
 };
 
-const modals = {
-  loginModal: '/components/login-modal.html',
-  premiumModal: '/components/premium-modal.html'
-};
+let currentPostLink = '';
 
 function showScreen(name) {
-  const url = screens[name];
-  if (!url) return;
-  loadComponent('screenContainer', url);
-}
-
-function openLoginModal() {
-  loadComponent('loginModal', modals.loginModal);
-}
-
-function openPremiumModal() {
-  loadComponent('premiumModal', modals.premiumModal);
+  loadComponent('screenContainer', screens[name]);
 }
 
 async function loadComponent(id, url) {
   try {
     const res = await fetch(url);
     if (!res.ok) throw new Error('Fehler beim Laden');
-    const html = await res.text();
-    const container = document.getElementById(id);
-    container.innerHTML = html;
+    document.getElementById(id).innerHTML = await res.text();
 
-    // NEU hinzugefügt – automatische Aktivierung
-    const screens = container.querySelectorAll('.screen');
-    screens.forEach(screen => screen.classList.add('active'));
-
+    if(url.includes('giveaway-preview.html')){
+      document.getElementById('previewLink').textContent = currentPostLink;
+    }
+    
+    document.querySelectorAll('.screen').forEach(s => s.classList.add('active'));
   } catch (err) {
     console.error(`[Drawly Fehler] Komponente '${url}' konnte nicht geladen werden.`, err);
-    document.getElementById(id).innerHTML = `
-      <div style="padding:2rem; color:#5b3e31; text-align:center;">
-        <h2>Ups, etwas ist schiefgelaufen 🧸</h2>
-        <p>Bitte lade die Seite neu. Falls das Problem bleibt, kontaktiere den Support.</p>
-      </div>`;
   }
 }
 
-
-function toggleMenu() {
-  const burger = document.getElementById('burger');
-  const nav = document.getElementById('navMenu');
-  burger.classList.toggle('open');
-  nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+function goToPreview() {
+  const postLink = document.getElementById('postLink').value;
+  if (!postLink) {
+    alert('Bitte gib einen gültigen Link ein!');
+    return;
+  }
+  currentPostLink = postLink;
+  showScreen('preview');
 }
+
+function goToCriteria() {
+  showScreen('criteria');
+}
+
+window.handlePostLink = () => {
+  const minTagged = document.getElementById('minTaggedAccounts').value;
+  const hashtags = document.getElementById('requiredHashtags').value.split(',').map(h => h.trim()).filter(h => h);
+  const postLiked = document.getElementById('postLiked').value === 'true';
+  const winnerCount = document.getElementById('winnerCount').value;
+
+  console.log({
+    currentPostLink,
+    minTagged,
+    hashtags,
+    postLiked,
+    winnerCount
+  });
+
+  alert('Kommentare werden geladen und ausgewertet.');
+};
 
 window.addEventListener('DOMContentLoaded', () => {
   showScreen('start');
 });
-
-// global verfügbar machen
-window.loadComponent = loadComponent;
-window.showScreen = showScreen;
-window.openLoginModal = openLoginModal;
-window.openPremiumModal = openPremiumModal;

@@ -1,12 +1,45 @@
-<!-- giveaway-criteria.html -->
-<div class="screen" style="max-width: 400px; margin: auto; text-align:center; background:#fffaf6; border-radius:24px; padding:2rem; box-shadow:0 6px 20px rgba(0,0,0,0.1);">
-  <h2 style="font-family: 'Playfair Display', serif; color:#5b3e31;">Kriterien auswählen</h2>
-  <div class="criteria-card" style="background:#fef9f3; border:1px solid #e8dcd1; padding:1rem; border-radius:16px; margin-bottom:1rem;">
-    <label style="color:#5b3e31;"><input type="checkbox" id="requireLike" /> Beitrag muss geliked sein</label>
+<!-- criteria.html -->
+<div class="screen active" style="max-width:500px;margin:auto;text-align:center;background:#fffaf6;border-radius:24px;padding:2rem;box-shadow:0 6px 20px rgba(0,0,0,0.1);">
+  <h2 style="font-family:'Playfair Display',serif;color:#5b3e31;margin-bottom:1rem;">Kriterien festlegen 🎯</h2>
+
+  <div style="margin-top:1.5rem;display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
+
+    <label style="font-weight:bold;color:#5b3e31;">Min. Anzahl markierter Accounts</label>
+    <select id="minTaggedAccounts" style="padding:0.75rem;width:80%;border-radius:20px;border:1px solid #ccc;">
+      <option value="0">Keine Vorgabe</option>
+      <option value="1">Mindestens 1</option>
+      <option value="2">Mindestens 2</option>
+      <option value="3">Mindestens 3</option>
+      <option value="4">Mindestens 4</option>
+      <option value="5">Mindestens 5</option>
+    </select>
+
+    <label style="font-weight:bold;color:#5b3e31;margin-top:1rem;">Erforderliche Hashtags (#, Komma-getrennt)</label>
+    <input type="text" id="requiredHashtags" placeholder="#gewinn,#verlosung" style="padding:0.75rem;width:80%;border-radius:20px;border:1px solid #ccc;">
+
+    <label style="font-weight:bold;color:#5b3e31;margin-top:1rem;">Beitrag muss geliked sein</label>
+    <select id="postLiked" style="padding:0.75rem;width:80%;border-radius:20px;border:1px solid #ccc;">
+      <option value="false">Nein</option>
+      <option value="true">Ja</option>
+    </select>
+
+    <label style="font-weight:bold;color:#5b3e31;margin-top:1rem;">Anzahl Gewinner festlegen</label>
+    <select id="winnerCount" style="padding:0.75rem;width:80%;border-radius:20px;border:1px solid #ccc;">
+      <option value="1">1 Gewinner</option>
+      <option value="2">2 Gewinner</option>
+      <option value="3">3 Gewinner</option>
+      <option value="4">4 Gewinner</option>
+      <option value="5">5 Gewinner</option>
+      <option value="6">6 Gewinner</option>
+      <option value="7">7 Gewinner</option>
+      <option value="8">8 Gewinner</option>
+      <option value="9">9 Gewinner</option>
+      <option value="10">10 Gewinner</option>
+    </select>
+    
   </div>
-  <div class="criteria-card" style="background:#fef9f3; border:1px solid #e8dcd1; padding:1rem; border-radius:16px; margin-bottom:1rem;">
-    <label style="color:#5b3e31;">Hashtags (durch Komma trennen)</label>
-    <input type="text" id="hashtagInput" placeholder="#gewinn, #drawly" style="margin-top:0.5rem; padding:0.5rem; width:100%; border-radius:16px; border:1px solid #ccc;" />
-  </div>
-  <button onclick="prepareDraw()" style="background:#c8a989; color:white; padding:0.75rem 1.2rem; border:none; border-radius:30px; font-weight:bold; cursor:pointer;">Gewinner auslosen</button>
+
+  <button onclick="handlePostLink()" style="background:#c8a989;color:white;padding:0.75rem 2rem;margin-top:1.5rem;border:none;border-radius:30px;font-weight:bold;cursor:pointer;">
+    Kommentare laden
+  </button>
 </div>
