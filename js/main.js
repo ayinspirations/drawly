@@ -34,7 +34,13 @@ async function loadComponent(id, url) {
     const res = await fetch(url);
     if (!res.ok) throw new Error('Fehler beim Laden');
     const html = await res.text();
-    document.getElementById(id).innerHTML = html;
+    const container = document.getElementById(id);
+    container.innerHTML = html;
+
+    // NEU hinzugefügt – automatische Aktivierung
+    const screens = container.querySelectorAll('.screen');
+    screens.forEach(screen => screen.classList.add('active'));
+
   } catch (err) {
     console.error(`[Drawly Fehler] Komponente '${url}' konnte nicht geladen werden.`, err);
     document.getElementById(id).innerHTML = `
@@ -44,6 +50,7 @@ async function loadComponent(id, url) {
       </div>`;
   }
 }
+
 
 function toggleMenu() {
   const burger = document.getElementById('burger');
