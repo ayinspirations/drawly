@@ -14,6 +14,14 @@
   box-sizing: border-box;
 }
 
+#previewLink {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  padding: 0 1rem;
+}
+
+
 /* Grundlayout */
 body {
   margin: 0;
